@@ -318,6 +318,8 @@ def download_build(args, save_to=None, unzip=True):
         dest = save_to
     with pushd(dest):
         print 'In %s' % dest
+        if not args.flash_url:
+            args.error('No URL set')
         res = requests.get(args.flash_url,
                            auth=HTTPBasicAuth(user, password), stream=True)
         if res.status_code != 200:
